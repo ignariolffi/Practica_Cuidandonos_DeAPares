@@ -3,19 +3,18 @@
 JUSTIFICACION DE DIAGRAMA:
 
 
-optamos por no dividir a la persona en dos clases por separado como cuidador y transeunte, dado que una persona puede variar entre ellos en tiempo de ejecucion. Utilizamos el patron State para poder modelar los posibles estados como Activo o Pasivo de la persona, dado que en cada uno diferencia el accionar que puede tener, siendo que se plantea que uno pude ser un usuario pasivo y silicitar el acompañamiento y en otro ser activo y ser quien acompaña y tenga que confirmar el viaje.
+* Optamos por no dividir a la persona en dos clases por separado como cuidador y transeunte, dado que una persona puede variar entre ellos en tiempo de ejecución. Utilizamos el Patron State para poder modelar los posibles estados como Activo o Pasivo de la persona, dado que en cada uno diferencia el accionar que puede tener, siendo que se plantea que uno pude ser un usuario pasivo y solicitar el acompañamiento y en otro ser activo y ser quien acompaña y tenga que confirmar el viaje.
 
-Decidimos que el destino se llame Viaje, el mismo contiene la direccion inicial oactual como la final o destino, ademas realizamos una lista para los cuiadadores solicitados y en otra lista aparte guardamos a aquellos que aceptan el viaje, ademas un boolean para saber si es que alguien lo acepto o conocer mas el estado del viaje.
-Para darle trazabilidad al viaje agregamos una fecaha con el horario en el que se realizara el viaje, agregamos un atributo para el calculo del tiempo esperado.
-Para el calculo del tiempo estimado utilizamos el patron Adapter para poder utilizar e integar a nuestro sistema la API de google que se plantea.
-Para el manejo viaje usamos el patron State para poder modificar en base al estado en el que esta, que acciones puede llevar a cabo, adema teniendo en cuanta que estos estados son consecutivos entre si y que en cada uno modifica su comportaminto.
+* Decidimos que el destino se llame Viaje, el mismo contiene la direccion inicial actual como la final o destino, ademas realizamos una lista para los cuidadores solicitados y en otra lista aparte guardamos a aquellos que aceptan el viaje, ademas un boolean para saber si es que alguien lo acepto o conocer mas del estado del viaje.
+* Para darle trazabilidad al viaje agregamos una fecha con el horario en el que se realizara el viaje, agregamos un atributo para el calculo del tiempo esperado.
+* Para el calculo del tiempo estimado utilizamos el patron Adapter para poder utilizar e integar a nuestro sistema la API de google que se plantea.
+Para el manejo de viaje usamos el patron State para poder modificar en base al estado en el que esta, que acciones puede llevar a cabo, ademas teniendo en cuenta que estos estados son consecutivos entre si y que en cada uno se modifica su comportaminto.
 
+* Para el manejo de las notificaciones creamos una clase Notificador que es de unica instancia la cual tiene un metodo que toma la forma de comunicacion definida por la persona y notificar un mensaje que se toma como parametro y tambien es una clase que contiene al mensaje y posiblemente se podria poner una fecha para que se sepa cuando se envio. Ademas esta forma de comunicacion a su vez seria utilizando un patron Strategy para poder implementar mas formas y modificar cual decide usar dando extensibilidad.
 
-para el manejo de las notificaciones creamos una clase Notifidor que es de unica instancia la cual tiene un metodo que toma la forma de comunicacion definida por la persona y notificar un mensaje que se toma como parametro y tambien es una clase que contiene al mensaje y posiblemente se podria poner una fecha para que se sepa cuando se envio. Ademas esta forma de comunicacion a su vez seria utilizando un patron Strategy para poder implementar mas formas y modificar cual decide usar dando extensibilidad.
+* Las formas de reaccion de la persona sera una lista de las que podra seleccionar cuales son las que desea utilizar y estas tambien estan hechas con un Strategy considerando la aparicion de nuevas formas y poder modificarlas en tiempo de ejecucion.
 
-Las formas de reaccion de la persona seran una lista de las que podra seleccionar cuales son las que desea utilizar y estas tambien estan hechas con un Strategy considerando la aparicion de nuevas formas y poder modificarlas en tiempo de ejecucion.
-
-PUNTO 2:
+## PUNTO 2
 
 public static double calcularTiempoDeDemoraAproximado(Viaje viaje) {
        
@@ -33,7 +32,7 @@ public static double calcularTiempoDeDemoraPromedio(List<Viaje> listaViajes) {
         return tiempoTotalDemora / listaViajes.size();
     }
 
-usa la reutilizacion de si mismo para aprovechar que cada una de las paradas sea un viaje en si, pudiendo usar el adapter para caluclar el tiempo promedio de cada uno de los viajes en si y despues iterar esta lista sumando los tiempos y dividirla por la cantidad de viajes.
+* Usa la reutilizacion de si mismo para aprovechar que cada una de las paradas sea un viaje en si, pudiendo usar el adapter para calcular el tiempo promedio de cada uno de los viajes en si y despues iterar esta lista sumando los tiempos y dividirla por la cantidad de viajes.
 
-despues cada viaje usamos el patron strateg para poder crear ademas nuevas formas de accionar en cada parada y asi tambien darle la opcion de usar mas de una en cada parada.
+* Despues cada viaje usamos el patron strategy para poder crear ademas nuevas formas de accionar en cada parada y asi tambien darle la opcion de usar mas de una en cada parada.
 
